@@ -1,0 +1,10 @@
+title: 565software
+description: Android アプリの開発・公開を行っています。
+contact_email: 565software@gmail.com
+
+lang: ja
+
+markdown: kramdown
+
+exclude:
+  - README.md

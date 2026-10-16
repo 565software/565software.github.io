@@ -1,0 +1,3 @@
+# app-ads.txt for 565software
+# Currently no ad SDKs are integrated.
+# This file will be updated when ad networks are added (see mvsync#39).

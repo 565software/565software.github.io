@@ -1,0 +1,14 @@
+# 言語ごとの UI 文言。キーはページの front matter の lang と対応する。
+ja:
+  lang_name: 日本語
+  home_url: /
+  description: Android アプリの開発・公開を行っています。
+  theme_to_dark: ダークモードに切り替え
+  theme_to_light: ライトモードに切り替え
+
+en:
+  lang_name: English
+  home_url: /en/
+  description: We develop and publish Android apps.
+  theme_to_dark: Switch to dark mode
+  theme_to_light: Switch to light mode

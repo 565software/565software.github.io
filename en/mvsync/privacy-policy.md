@@ -2,11 +2,12 @@
 layout: default
 title: Privacy Policy - mvsync
 lang: en
+ref: mvsync-privacy-policy
 ---
 
 # Privacy Policy
 
-mvsync (565software) / [日本語版](privacy-policy.html)
+mvsync (565software)
 
 ## Introduction
 

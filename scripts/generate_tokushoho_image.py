@@ -77,19 +77,26 @@ def wrap_text(text, font, max_width, draw):
             lines.append(current_line)
     return lines
 
+def get_line_height(font):
+    ascent, descent = font.getmetrics()
+    return ascent + descent
+
 def generate_image(text: str, output_path: str):
     font_path = find_font()
     if not font_path:
-        print("Warning: Japanese font not found. Falling back to default font.", file=sys.stderr)
-        title_font = ImageFont.load_default()
-        body_font = ImageFont.load_default()
-        sub_font = ImageFont.load_default()
-    else:
-        # 2x Retina解像度用
-        title_font = ImageFont.truetype(font_path, 40)
-        heading_font = ImageFont.truetype(font_path, 28)
-        body_font = ImageFont.truetype(font_path, 26)
-        sub_font = ImageFont.truetype(font_path, 22)
+        print("Error: Japanese font not found. Please install fonts-noto-cjk or ipafont.", file=sys.stderr)
+        sys.exit(1)
+
+    # 2x Retina解像度用
+    title_font = ImageFont.truetype(font_path, 40)
+    heading_font = ImageFont.truetype(font_path, 28)
+    body_font = ImageFont.truetype(font_path, 26)
+    sub_font = ImageFont.truetype(font_path, 22)
+
+    title_lh = get_line_height(title_font)
+    heading_lh = get_line_height(heading_font)
+    body_lh = get_line_height(body_font)
+    sub_lh = get_line_height(sub_font)
 
     # 描画キャンバス設計（2xスケール）
     card_width = 1200
@@ -97,7 +104,6 @@ def generate_image(text: str, output_path: str):
     padding_y = 60
     content_width = card_width - (padding_x * 2)
 
-    # 予備描画用でサイズ計算
     dummy_img = Image.new("RGBA", (card_width, 100), (255, 255, 255, 0))
     draw = ImageDraw.Draw(dummy_img)
 
@@ -113,17 +119,14 @@ def generate_image(text: str, output_path: str):
         if line.startswith("【") and line.endswith("】"):
             # メインタイトル
             title_text = line.strip("【】")
-            bbox = draw.textbbox((0, 0), title_text, font=title_font)
-            line_height = bbox[3] - bbox[1]
             rendered_items.append({
                 "type": "title",
                 "text": title_text,
                 "font": title_font,
                 "color": "#111827",
                 "y": current_y,
-                "height": line_height
             })
-            current_y += line_height + 25
+            current_y += title_lh + 25
             rendered_items.append({
                 "type": "separator",
                 "y": current_y
@@ -131,24 +134,19 @@ def generate_image(text: str, output_path: str):
             current_y += 35
         elif line.startswith("■"):
             # 項目見出し
-            bbox = draw.textbbox((0, 0), line, font=heading_font)
-            line_height = bbox[3] - bbox[1]
-            current_y += 12
+            current_y += 14
             rendered_items.append({
                 "type": "heading",
                 "text": line,
                 "font": heading_font,
                 "color": "#1f2937",
                 "y": current_y,
-                "height": line_height
             })
-            current_y += line_height + 14
+            current_y += heading_lh + 12
         elif line.startswith("※"):
             # 補足説明
             wrapped = wrap_text(line, sub_font, content_width - 30, draw)
             for wline in wrapped:
-                bbox = draw.textbbox((0, 0), wline, font=sub_font)
-                line_height = bbox[3] - bbox[1]
                 rendered_items.append({
                     "type": "sub",
                     "text": wline,
@@ -156,16 +154,13 @@ def generate_image(text: str, output_path: str):
                     "color": "#6b7280",
                     "x_offset": 30,
                     "y": current_y,
-                    "height": line_height
                 })
-                current_y += line_height + 10
+                current_y += sub_lh + 8
             current_y += 6
         else:
             # 本文
             wrapped = wrap_text(line, body_font, content_width - 30, draw)
             for wline in wrapped:
-                bbox = draw.textbbox((0, 0), wline, font=body_font)
-                line_height = bbox[3] - bbox[1]
                 rendered_items.append({
                     "type": "body",
                     "text": wline,
@@ -173,9 +168,8 @@ def generate_image(text: str, output_path: str):
                     "color": "#374151",
                     "x_offset": 30,
                     "y": current_y,
-                    "height": line_height
                 })
-                current_y += line_height + 12
+                current_y += body_lh + 12
 
     total_height = current_y + padding_y
 
@@ -211,9 +205,15 @@ def generate_image(text: str, output_path: str):
     print(f"Generated Tokushoho image: {output_path} ({card_width}x{total_height})")
 
 def main():
+    is_ci = os.environ.get("GITHUB_ACTIONS") == "true" or os.environ.get("CI") == "true"
     text = os.environ.get("TOKUSHOHO_TEXT")
+
     if not text or not text.strip():
-        print("Note: TOKUSHOHO_TEXT environment variable is not set or empty. Using default template.")
+        if is_ci:
+            print("Error: TOKUSHOHO_TEXT secret is not set or empty in CI environment.", file=sys.stderr)
+            print("Please set the TOKUSHOHO_TEXT secret in GitHub repository settings.", file=sys.stderr)
+            sys.exit(1)
+        print("Note: TOKUSHOHO_TEXT environment variable is not set or empty. Using default template (local only).")
         text = DEFAULT_FALLBACK_TEXT
 
     repo_root = Path(__file__).resolve().parent.parent

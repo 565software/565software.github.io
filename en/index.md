@@ -14,3 +14,8 @@ A side-by-side video comparison app.
 
 - [Privacy Policy](mvsync/privacy-policy.html)
 - [Support](mvsync/support.html)
+
+---
+
+- [Specified Commercial Transactions Act (Japanese)](../tokushoho.html)
+

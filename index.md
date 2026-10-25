@@ -13,3 +13,8 @@ Android アプリの開発・公開を行っています。
 
 - [プライバシーポリシー](mvsync/privacy-policy.html)
 - [サポート](mvsync/support.html)
+
+---
+
+- [特定商取引法に基づく表記](tokushoho.html)
+

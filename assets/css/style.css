@@ -99,6 +99,21 @@ h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
 p, li { font-size: 0.95rem; }
 ul { padding-left: 1.5rem; }
 
+/* 特定商取引法画像 */
+.tokushoho-wrapper {
+  margin: 1.5rem 0 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.tokushoho-img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
 hr { border: 0; border-top: 1px solid var(--border); }
 
 footer {

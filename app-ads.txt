@@ -1,3 +1,3 @@
 # app-ads.txt for 565software
-# Currently no ad SDKs are integrated.
-# This file will be updated when ad networks are added (see mvsync#39).
+# MVsync の無料版のリワード広告（Google AdMob。mvsync#91）
+google.com, pub-3465655228194892, DIRECT, f08c47fec0942fa0

@@ -50,3 +50,18 @@
   apply(current());
   button.hidden = false;
 })();
+
+// 言語切替リンクをクリックした際、明示的に選んだ言語を保存して次回以降の自動リダイレクト制御に使用する
+(function () {
+  var links = document.querySelectorAll('.lang-switch');
+  for (var i = 0; i < links.length; i++) {
+    links[i].addEventListener('click', function () {
+      var lang = this.getAttribute('lang');
+      if (lang) {
+        try {
+          localStorage.setItem('preferred_lang', lang);
+        } catch (e) {}
+      }
+    });
+  }
+})();

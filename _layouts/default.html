@@ -17,6 +17,10 @@
   <script>
     // ブラウザ言語が日本語以外かつ明示的な言語選択がない場合、英語ページへ自動リダイレクト
     (function () {
+      try {
+        // 同一サイト内からの遷移（言語切替リンク、新規タブで開くなど）の場合はリダイレクトしない
+        if (document.referrer && new URL(document.referrer).origin === location.origin) return;
+      } catch (e) {}
       var preferred = null;
       try {
         preferred = localStorage.getItem('preferred_lang');
@@ -28,10 +32,6 @@
         location.replace('{{ en_page.url | relative_url }}');
         return;
       }
-      try {
-        // 同一サイト内からの遷移（言語切替リンク、新規タブで開くなど）の場合はリダイレクトしない
-        if (document.referrer && new URL(document.referrer).origin === location.origin) return;
-      } catch (e) {}
       var langs = navigator.languages || [navigator.language || ''];
       // 第1優先言語（langs[0]）を判定。言語情報が取得できない場合はリダイレクトしない
       var firstLang = (langs[0] || '').toLowerCase();

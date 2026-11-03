@@ -3,6 +3,7 @@
 {%- if page.ref -%}
   {%- assign translations = site.pages | where: "ref", page.ref -%}
 {%- endif -%}
+{%- assign en_page = translations | where: "lang", "en" | first -%}
 <!DOCTYPE html>
 <html lang="{{ lang }}">
 <head>
@@ -12,6 +13,21 @@
   <meta name="color-scheme" content="light dark">
   <meta name="description" content="{{ t.description }}">
   <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+  {%- if lang == 'ja' and en_page -%}
+  <script>
+    // ブラウザ言語が日本語以外かつ明示的な言語選択がない場合、英語ページへ自動リダイレクト
+    (function () {
+      try {
+        if (localStorage.getItem('preferred_lang')) return;
+      } catch (e) {}
+      var langs = navigator.languages || [navigator.language || ''];
+      var firstLang = (langs[0] || '').toLowerCase();
+      if (firstLang.indexOf('ja') !== 0) {
+        location.replace('{{ en_page.url | relative_url }}');
+      }
+    })();
+  </script>
+  {%- endif -%}
   <script>
     // 描画前にテーマを確定させてちらつきを防ぐ（保存値が無ければ OS 設定）
     (function () {

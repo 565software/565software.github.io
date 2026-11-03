@@ -52,6 +52,7 @@
 })();
 
 // 言語切替リンクをクリックした際、明示的に選んだ言語を保存して自動リダイレクトを抑止する
+// （現状は値の有無のみを参照しているが、将来の拡張を見据えて選んだ言語コードを保存）
 (function () {
   var links = document.querySelectorAll('.lang-switch');
   for (var i = 0; i < links.length; i++) {

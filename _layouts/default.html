@@ -17,10 +17,17 @@
   <script>
     // ブラウザ言語が日本語以外かつ明示的な言語選択がない場合、英語ページへ自動リダイレクト
     (function () {
+      var preferred = null;
       try {
-        // 手動で言語選択済みの場合はリダイレクトしない（値の内容に関わらずユーザーの明示的選択を尊重）
-        if (localStorage.getItem('preferred_lang')) return;
+        preferred = localStorage.getItem('preferred_lang');
       } catch (e) {}
+      // 明示的に日本語を選択している場合はリダイレクトしない
+      if (preferred === 'ja') return;
+      // 明示的に英語を選択している場合は英語ページへリダイレクト
+      if (preferred === 'en') {
+        location.replace('{{ en_page.url | relative_url }}');
+        return;
+      }
       try {
         // 同一サイト内からの遷移（言語切替リンク、新規タブで開くなど）の場合はリダイレクトしない
         if (document.referrer && new URL(document.referrer).origin === location.origin) return;

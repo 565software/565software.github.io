@@ -27,7 +27,7 @@ However, the free version of the App shows ads, and uses Google's advertising se
   - [How Google uses information from sites or apps that use its services](https://policies.google.com/technologies/partner-sites)
 - In the EU, the UK and some other regions, the App first asks for your consent to ad serving using Google's consent management tool (User Messaging Platform). You can change your choice at any time from Settings → About this app → Privacy settings in the App.
 - You can reset or delete your advertising ID in your device settings.
-- If you purchase Pro (one-time purchase), no ads are shown and the advertising SDK does not run.
+- If you purchase MVsync Premium (one-time purchase), no ads are shown and the advertising SDK does not run.
 
 ## Data Handling on Your Device
 
@@ -49,4 +49,4 @@ If you have any questions about this policy, please contact us at the following 
 ---
 
 Effective date: October 16, 2026<br>
-Last updated: October 31, 2026
+Last updated: November 7, 2026

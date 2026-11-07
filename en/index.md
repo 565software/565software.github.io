@@ -8,7 +8,7 @@ We develop and publish Android apps.
 
 ## Apps
 
-### mvsync
+### MVsync
 
 A side-by-side video comparison app.
 

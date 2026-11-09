@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+# 画像ファイル（特商法画像など）のクローラー・画像検索・OCR防止
+Disallow: /assets/images/

@@ -41,7 +41,7 @@ jobs:
           ruby-version: "3.3"
 
       - name: Install Jekyll
-        run: gem install jekyll --no-document
+        run: gem install jekyll -v "~> 4.4" --no-document
 
       - name: Build with Jekyll
         env:

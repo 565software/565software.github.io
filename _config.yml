@@ -1,6 +1,6 @@
 title: 565software
 contact_email: 565software@gmail.com
-url: https://565software.github.io
+url: https://565software.com
 
 lang: ja
 
@@ -9,3 +9,4 @@ markdown: kramdown
 exclude:
   - README.md
   - scripts
+  - wrangler.jsonc

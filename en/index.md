@@ -12,6 +12,7 @@ We develop and publish Android apps.
 
 A side-by-side video comparison app.
 
+- [Product Page](mvsync/)
 - [Privacy Policy](mvsync/privacy-policy.html)
 - [Support](mvsync/support.html)
 

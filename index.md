@@ -11,6 +11,7 @@ Android アプリの開発・公開を行っています。
 
 動画を横に並べて比較するアプリ。
 
+- [製品ページ](mvsync/)
 - [プライバシーポリシー](mvsync/privacy-policy.html)
 - [サポート](mvsync/support.html)
 

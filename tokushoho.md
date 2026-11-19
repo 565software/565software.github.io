@@ -3,6 +3,7 @@ layout: default
 title: 特定商取引法に基づく表記
 ref: tokushoho
 lang: ja
+noindex: true
 ---
 
 # 特定商取引法に基づく表記

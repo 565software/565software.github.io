@@ -4,19 +4,18 @@
 {%- if page.ref -%}
   {%- assign translations = site.pages | where: "ref", page.ref -%}
 {%- endif -%}
-{%- assign en_page = translations | where: "lang", "en" | first -%}
 <!DOCTYPE html>
 <html lang="{{ lang }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  {%- unless page.noindex == false %}
+  {%- if page.noindex %}
   <meta name="robots" content="noindex, nofollow, noarchive">
-  {%- endunless %}
+  {%- endif %}
   <meta name="color-scheme" content="light dark">
   <meta name="description" content="{{ meta_description }}">
   <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
-  {%- if page.noindex == false %}
+  {%- unless page.noindex %}
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <meta property="og:title" content="{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}">
   <meta property="og:description" content="{{ meta_description }}">
@@ -29,37 +28,7 @@
   <meta property="og:image" content="{{ page.og_image | absolute_url }}">
   <meta name="twitter:card" content="summary_large_image">
   {%- endif %}
-  {%- endif %}
-  {%- if lang == 'ja' and en_page and page.noindex != false -%}
-  <script>
-    // ブラウザ言語が日本語以外かつ明示的な言語選択がない場合、英語ページへ自動リダイレクト
-    (function () {
-      try {
-        // 同一サイト内からの遷移（言語切替リンク、新規タブで開くなど）の場合はリダイレクトしない
-        if (document.referrer && new URL(document.referrer).origin === location.origin) return;
-      } catch (e) {}
-      var preferred = null;
-      try {
-        preferred = localStorage.getItem('preferred_lang');
-      } catch (e) {}
-      // 明示的に日本語を選択している場合はリダイレクトしない
-      if (preferred === 'ja') return;
-      // 明示的に英語を選択している場合は英語ページへリダイレクト
-      if (preferred === 'en') {
-        location.replace('{{ en_page.url | relative_url }}');
-        return;
-      }
-      var langs = navigator.languages || [navigator.language || ''];
-      // 第1優先言語（langs[0]）を判定。言語情報が取得できない場合はリダイレクトしない
-      var firstLang = (langs[0] || '').toLowerCase();
-      if (!firstLang) return;
-      // 第1優先言語が日本語以外の場合（例: ['en-US', 'ja'] のように第2言語以降に日本語がある場合も含む）英語ページへ
-      if (firstLang.indexOf('ja') !== 0) {
-        location.replace('{{ en_page.url | relative_url }}');
-      }
-    })();
-  </script>
-  {%- endif -%}
+  {%- endunless %}
   <script>
     // 描画前にテーマを確定させてちらつきを防ぐ（保存値が無ければ OS 設定）
     (function () {

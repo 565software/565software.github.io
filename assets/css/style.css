@@ -131,6 +131,84 @@ footer {
   font-size: 0.85rem;
 }
 
+/* トップページ */
+.home-intro {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.home-intro__title {
+  margin: 0 0 0.4rem;
+  font-size: 1.75rem;
+}
+
+.home-intro__lead {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.home-apps {
+  margin-top: 2rem;
+}
+
+.home-apps h2 {
+  margin-top: 0;
+}
+
+.app-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.app-card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+
+.app-card:hover {
+  border-color: var(--muted);
+}
+
+.app-card__main {
+  display: block;
+  padding: 1.25rem;
+  color: var(--fg);
+}
+
+.app-card__main:hover {
+  text-decoration: none;
+}
+
+.app-card__logo {
+  margin: 0 0 0.75rem;
+  line-height: 1;
+}
+
+.app-card__logo .mvsync-logo {
+  height: 32px;
+}
+
+.app-card__desc {
+  margin: 0 0 0.75rem;
+  color: var(--muted);
+  font-size: 0.93rem;
+}
+
+.app-card__cta {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.app-card__main:hover .app-card__cta {
+  text-decoration: underline;
+}
+
 /* 製品ページ */
 .product-hero {
   display: grid;

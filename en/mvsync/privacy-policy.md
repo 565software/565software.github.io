@@ -3,6 +3,7 @@ layout: default
 title: Privacy Policy - MVsync
 lang: en
 ref: mvsync-privacy-policy
+description: Privacy Policy for the Android app MVsync by 565software.
 ---
 
 # Privacy Policy

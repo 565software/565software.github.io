@@ -17,16 +17,20 @@
   <meta name="description" content="{{ meta_description }}">
   <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
   {%- if page.noindex == false %}
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
   <meta property="og:title" content="{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}">
   <meta property="og:description" content="{{ meta_description }}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ page.url | absolute_url }}">
+  {%- if t.og_locale %}
+  <meta property="og:locale" content="{{ t.og_locale }}">
+  {%- endif %}
   {%- if page.og_image %}
   <meta property="og:image" content="{{ page.og_image | absolute_url }}">
   <meta name="twitter:card" content="summary_large_image">
   {%- endif %}
   {%- endif %}
-  {%- if lang == 'ja' and en_page -%}
+  {%- if lang == 'ja' and en_page and page.noindex != false -%}
   <script>
     // ブラウザ言語が日本語以外かつ明示的な言語選択がない場合、英語ページへ自動リダイレクト
     (function () {

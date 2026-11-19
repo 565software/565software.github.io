@@ -80,12 +80,31 @@ def parse_ts_consts(path: Path) -> dict[str, str]:
     return consts
 
 
-def generate_icon_svg(icon_shapes_path: Path, dst: Path) -> None:
-    consts = parse_ts_consts(icon_shapes_path)
-    required = ("ICON_BG_FROM", "ICON_BG_TO", "ICON_SCREEN", "ICON_SCREENS", "ICON_PLAY", "ICON_PLAYS")
+ICON_REQUIRED_CONSTS = (
+    "ICON_BG_FROM",
+    "ICON_BG_TO",
+    "ICON_SCREEN",
+    "ICON_SCREENS",
+    "ICON_PLAY",
+    "ICON_PLAYS",
+)
+WORDMARK_REQUIRED_CONSTS = (
+    "WORDMARK_EM",
+    "WORDMARK_PATH",
+    "WORDMARK_WIDTH",
+    "WORDMARK_DESCENT",
+)
+
+
+def require_consts(consts: dict[str, str], required: tuple[str, ...], path: Path) -> None:
     missing = [key for key in required if key not in consts]
     if missing:
-        raise RuntimeError(f"Missing constants in {icon_shapes_path}: {', '.join(missing)}")
+        raise RuntimeError(f"Missing constants in {path}: {', '.join(missing)}")
+
+
+def generate_icon_svg(icon_shapes_path: Path, dst: Path) -> None:
+    consts = parse_ts_consts(icon_shapes_path)
+    require_consts(consts, ICON_REQUIRED_CONSTS, icon_shapes_path)
 
     svg = (
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="18 18 72 72">\n'
@@ -106,7 +125,9 @@ def generate_icon_svg(icon_shapes_path: Path, dst: Path) -> None:
 
 def generate_brand_logo_svg(icon_shapes_path: Path, wordmark_path: Path, dst: Path) -> None:
     icons = parse_ts_consts(icon_shapes_path)
+    require_consts(icons, ICON_REQUIRED_CONSTS, icon_shapes_path)
     words = parse_ts_consts(wordmark_path)
+    require_consts(words, WORDMARK_REQUIRED_CONSTS, wordmark_path)
 
     side = float(words["WORDMARK_EM"])
     gap = side * 0.25

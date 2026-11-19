@@ -3,6 +3,7 @@ layout: default
 title: Support - MVsync
 lang: en
 ref: mvsync-support
+description: FAQ and contact information for the Android app MVsync.
 ---
 
 # Support

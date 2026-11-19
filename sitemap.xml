@@ -1,0 +1,21 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+{%- assign public_pages = site.pages | where: "layout", "default" | where_exp: "p", "p.noindex != true" -%}
+{%- for p in public_pages %}
+  <url>
+    <loc>{{ p.url | absolute_url }}</loc>
+    {%- if p.ref -%}
+      {%- assign translations = public_pages | where: "ref", p.ref -%}
+      {%- if translations.size > 1 -%}
+        {%- for tr in translations %}
+    <xhtml:link rel="alternate" hreflang="{{ tr.lang | default: site.lang }}" href="{{ tr.url | absolute_url }}" />
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endif %}
+  </url>
+{%- endfor %}
+</urlset>

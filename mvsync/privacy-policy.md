@@ -2,6 +2,7 @@
 layout: default
 title: プライバシーポリシー - MVsync
 ref: mvsync-privacy-policy
+description: Android アプリ「MVsync」における利用者情報の取り扱いについて説明します。
 ---
 
 # プライバシーポリシー

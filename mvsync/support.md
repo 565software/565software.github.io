@@ -2,6 +2,7 @@
 layout: default
 title: サポート - MVsync
 ref: mvsync-support
+description: Android アプリ「MVsync」のよくある質問・お問い合わせ案内です。
 ---
 
 # サポート

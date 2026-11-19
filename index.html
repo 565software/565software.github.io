@@ -1,0 +1,25 @@
+---
+layout: default
+ref: home
+---
+
+<section class="home-intro">
+  <h1 class="home-intro__title">565software</h1>
+  <p class="home-intro__lead">Android アプリの開発・公開を行っています。</p>
+</section>
+
+<section class="home-apps">
+  <h2>アプリ</h2>
+  <div class="app-list">
+    <article class="app-card">
+      <a href="{{ '/mvsync/' | relative_url }}" class="app-card__main">
+        <h3 class="app-card__logo">
+          <span class="sr-only">MVsync</span>
+          {% include mvsync-logo.svg %}
+        </h3>
+        <p class="app-card__desc">2つの動画のタイミングを合わせて並べて同時再生する、Android 向けの動画比較アプリです。</p>
+        <span class="app-card__cta">製品ページを見る &rarr;</span>
+      </a>
+    </article>
+  </div>
+</section>
